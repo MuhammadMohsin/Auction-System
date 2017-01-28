@@ -13,12 +13,14 @@ import { LoginComponent } from '../components/login.component/login.component';
 import {UserService} from "../services/user.service";
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {AuctionComponent} from "../components/auction.component/auction.component";
+import {ApplyBidDialog} from "../models/apply.bid";
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    AuctionComponent
+    AuctionComponent,
+    ApplyBidDialog
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,9 @@ import {AuctionComponent} from "../components/auction.component/auction.componen
     RouterModule.forRoot(routes),
     MaterialModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig,myFirebaseAuthConfig)
+  ],
+  entryComponents: [
+    ApplyBidDialog
   ],
   providers: [UserService,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

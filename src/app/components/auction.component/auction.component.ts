@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AngularFire} from 'angularfire2'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service'
+import { MdDialogRef, MdDialog } from '@angular/material'
+import {ApplyBidDialog} from "../../models/apply.bid";
 
 @Component({
   selector: 'login',
@@ -30,7 +32,7 @@ export class AuctionComponent {
     bidAwardedTo: ""
   };
 
-  constructor(private af: AngularFire, private _router: Router, private _userService: UserService) {
+  constructor(private af: AngularFire, private _router: Router, private _userService: UserService,public dialog: MdDialog) {
     this.afRef = af;
     this.router = _router;
     this.userService = _userService;
@@ -84,16 +86,13 @@ export class AuctionComponent {
     }
   }
 
-  applyBid(auctionObj){
-    console.log(auctionObj);
-  }
-
   awardBid(auctionObj){
     console.log(auctionObj);
     auctionObj.bidAwardedTo = auctionObj.lastBidBy;
 
     let awardedTo: String= auctionObj.lastBidBy;
-    this.AuctionRef.update("-Kb_YFh1qKKakfvnZDNZ",{ bidAwardedTo: awardedTo })
+    let key:String = auctionObj.$key;
+    this.AuctionRef.update(key,{ bidAwardedTo: awardedTo })
       .then(data=>{
         alert("Auction awarded successfully");
       }, err=>{
@@ -101,7 +100,62 @@ export class AuctionComponent {
       })
   }
 
+  dialogRef: MdDialogRef<ApplyBidDialog>;
+
+  applyBid(auctionObj) {
+    console.log(auctionObj);
+
+
+    let minBid: Number = Number(auctionObj.lastMaxBid);
+    this.dialogRef = this.dialog.open(ApplyBidDialog,{disableClose: false});
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('result: ' + result);
+      this.dialogRef = null;
+      if(!result){
+        return null;
+      }
+
+      if(isNaN(result)){
+        alert("Please enter correct value");
+        return null;
+      }
+      let offeredBid = Number(result);
+      let minBid: Number = Number(auctionObj.minBid);
+      if(auctionObj.lastMaxBid){
+        let lastBid: Number = Number(auctionObj.lastMaxBid);
+        if(offeredBid <= lastBid ){
+          alert("Your bid is not acceptable!! Last max bid is :" + auctionObj.lastMaxBid);
+        }
+        if(offeredBid > Number(auctionObj.lastMaxBid)){
+
+          let key:String = auctionObj.$key;
+          let authUserKey: String = this.userAuth.$key;
+          this.AuctionRef.update(key,{ lastBidBy: authUserKey, lastMaxBid : result })
+            .then(data=>{
+              alert("Auction bidded successfully");
+            }, err=>{
+              alert(err.message);
+            })
+        }
+      }
+
+      else if(offeredBid <= minBid ){
+        alert("Your bid is not acceptable!! Minimum bid requirement is :" + auctionObj.minBid);
+      }
+
+
+
+      /* else{
+        alert("Your bid is acceptable");
+      }*/
+
+    });
+  }
+
   logout() {
     this.userService.logoutUser();
   }
 }
+
+

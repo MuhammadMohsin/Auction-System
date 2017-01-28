@@ -130,6 +130,8 @@
               <h1 md-line> <b>Description :  {{auctionObj.desc}} </b> </h1>
               <h3 md-line> <b>Quantity : </b>{{auctionObj.qty}} </h3>
               <h3 md-line> <b>Min bid : </b>{{auctionObj.minBid}} </h3>
+              <h3 md-line *ngIf="auctionObj.lastMaxBid!=''"> <b>Last bid : </b>{{auctionObj.lastMaxBid}} </h3>
+              <h3 md-line *ngIf="auctionObj.lastMaxBid==''"> <b>Last bid : </b> Not yet bidded </h3>
               <button md-button md-raised-button color="primary" (click)="applyBid(auctionObj)" style="position: absolute; right: 23px;"> Bid</button>
             </md-list-item>
             <md-divider></md-divider>
