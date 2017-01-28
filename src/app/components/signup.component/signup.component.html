@@ -1,0 +1,117 @@
+<md-toolbar color="primary">
+  Parking Booking System
+</md-toolbar>
+
+<md-card class="signup-container">
+  <md-card-title>Signup</md-card-title>
+  <md-card-content>
+
+    <div>
+      <md-input-container>
+        <input md-input [(ngModel)]="userObj.fullName" type="text" placeholder="Enter Full Name">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <input md-input [(ngModel)]="userObj.email" type="text" placeholder="Enter Email">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <input md-input [(ngModel)]="userObj.password" type="password" placeholder="Create Password">
+      </md-input-container>
+    </div>
+  </md-card-content>
+
+  <button md-button md-raised-button color="warn" [routerLink]="['/login']">Cancel</button>
+  <button md-button md-raised-button color="primary" (click)="signupUser()">Sign up</button>
+
+</md-card>
+
+<!--<md-tab-group class="signup-tab-container">
+  <md-tab>
+    <template md-tab-label>
+      Register as Student
+    </template>
+
+    <md-card class="signup-container">
+      <md-card-title>Signup</md-card-title>
+      <md-card-content>
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.useremail" type="text" placeholder="Enter Email">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.age" type="text" placeholder="Enter Age">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.collegeName" type="text" placeholder="Enter College Name">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.lastDegree" type="text" placeholder="Enter Degree Name">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.marksObtain" type="text" placeholder="Enter Marks Obtain">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="userObj.password" type="password" placeholder="Create Password">
+          </md-input-container>
+        </div>
+      </md-card-content>
+      &lt;!&ndash;<md-card-actions>&ndash;&gt;
+        <button md-button md-raised-button color="warn" [routerLink]="['/login']">Cancel</button>
+        <button md-button md-raised-button color="primary" (click)="signupUser()">Sign up</button>
+      &lt;!&ndash;</md-card-actions>&ndash;&gt;
+    </md-card>
+  </md-tab>
+
+  <md-tab>
+    <template md-tab-label>
+      Register as Company
+    </template>
+
+    <md-card class="signup-container">
+      <md-card-title>Signup</md-card-title>
+      <md-card-content>
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="companyObj.email" type="text" placeholder="Enter Email">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="companyObj.companyName" type="text" placeholder="Enter Company Name">
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container>
+            <input md-input [(ngModel)]="companyObj.password" type="password" placeholder="Create Password">
+          </md-input-container>
+        </div>
+      </md-card-content>
+      &lt;!&ndash;<md-card-actions>&ndash;&gt;
+        <button md-button md-raised-button color="warn" [routerLink]="['/login']">Cancel</button>
+        <button md-button md-raised-button color="primary" (click)="signupCompany()">Sign up</button>
+      &lt;!&ndash;</md-card-actions>&ndash;&gt;
+    </md-card>
+  </md-tab>
+</md-tab-group>-->

@@ -1,0 +1,21 @@
+.friends-box:hover{
+  background-color: royalblue;
+  cursor: pointer;
+}
+.send-msg-container{
+  position: fixed;
+  bottom: 5px;
+  right: 0;
+  left: 365px;
+}
+.send-msg-container textarea{
+  width: 90%;
+  height: 60px;
+  margin-bottom: -13px;
+}
+.changeBg{
+  background-color: royalblue;
+}
+.align_right{
+  text-align: right;
+}

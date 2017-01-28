@@ -1,0 +1,23 @@
+<md-toolbar color="primary">
+  Campus Recruitment System
+</md-toolbar>
+
+<md-card  class="login-container">
+  <md-card-title>Login</md-card-title>
+  <md-card-content>
+    <div>
+      <md-input-container>
+        <input md-input [(ngModel)]="userObj.email" type="text" placeholder="Enter Email">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input md-input [(ngModel)]="userObj.password" type="password" placeholder="Enter Password">
+      </md-input-container>
+    </div>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button md-raised-button color="ACCENT" [routerLink]="['/signup']">Sign up</button>
+    <button md-button md-raised-button color="primary" (click)="loginUser()">Login</button>
+  </md-card-actions>
+</md-card>
