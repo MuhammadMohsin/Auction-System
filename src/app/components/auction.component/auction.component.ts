@@ -10,18 +10,19 @@ import { UserService } from '../../services/user.service'
 })
 export class AuctionComponent {
   afRef: any;
-  feedbackRef: any;
+  AuctionRef: any;
   userAuth;
   router;
   userService;
-  feedbackMsgList;
+  AuctionsList;
 
   newAuctionObj = {
     title: "",
     minBid : "",
     url: "",
     qty: "",
-    desc: ""
+    desc: "",
+    lastMaxBid : ""
   };
 
   constructor(private af: AngularFire, private _router: Router, private _userService: UserService) {
@@ -29,15 +30,36 @@ export class AuctionComponent {
     this.router = _router;
     this.userService = _userService;
     this.userAuth = this.userService.getUserData();
-    this.feedbackRef = this.afRef.database.list("/feedbacks");
-    this.feedbackRef.subscribe(feeds=>{
-      this.feedbackMsgList = feeds;
+    this.AuctionRef = this.afRef.database.list("/auctions");
+    this.AuctionRef.subscribe(feeds=>{
+      this.AuctionsList = feeds;
     });
 
   }
 
   postNewAuction(){
-    console.log(this.newAuctionObj)
+    if(this.newAuctionObj.title.trim()!="" && this.newAuctionObj.minBid.trim()!="" && this.newAuctionObj.qty.trim()!="" && this.newAuctionObj.desc.trim()!=""){
+      console.log(this.newAuctionObj);
+      this.newAuctionObj.lastMaxBid = "";
+      this.AuctionRef.push(this.newAuctionObj)
+        .then(data=>{
+          this.newAuctionObj = {
+            title: "",
+            minBid : "",
+            url: "",
+            qty: "",
+            desc: "",
+            lastMaxBid : ""
+          };
+          alert("Auction posted successfully");
+        }, err=>{
+          alert(err.message);
+        })
+    }
+    else{
+      alert("Please alert all required fields");
+    }
+
   }
 
   logout() {
