@@ -16,6 +16,7 @@ export class AuctionComponent {
   userService;
   auctionsList = [];
   myPostedAuctionsList = [];
+  myAwardedAuction = [];
 
   newAuctionObj = {
     title: "",
@@ -24,7 +25,8 @@ export class AuctionComponent {
     qty: "",
     desc: "",
     lastMaxBid : "",
-    postedBy: ""
+    postedBy: "",
+    bidAwardedTo: ""
   };
 
   constructor(private af: AngularFire, private _router: Router, private _userService: UserService) {
@@ -38,10 +40,14 @@ export class AuctionComponent {
     this.AuctionRef.subscribe(auctions=>{
       this.auctionsList = [];
       this.myPostedAuctionsList = [];
+      this.myAwardedAuction = [];
       this.auctionsList = auctions;
       this.auctionsList.forEach(auctionObj=>{
         if(auctionObj.postedBy == authUserKey){
           this.myPostedAuctionsList.push(auctionObj);
+        }
+        if(auctionObj.bidAwardedTo == authUserKey){
+          this.myAwardedAuction.push(auctionObj);
         }
       })
 
@@ -64,6 +70,7 @@ export class AuctionComponent {
             desc: "",
             lastMaxBid : "",
             postedBy: "",
+            bidAwardedTo: ""
           };
           alert("Auction posted successfully");
         }, err=>{
