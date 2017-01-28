@@ -1,7 +1,7 @@
 # ChatApp
 
 <br />
-Click [here](https://chat-and-image-sharing.firebaseapp.com) to check this app on firebase.
+Click [here](https://auction-system-dd0d5.firebaseapp.com) to check this app on firebase.
 <br />
 
 ### User account <br/>

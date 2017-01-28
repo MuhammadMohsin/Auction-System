@@ -77,8 +77,8 @@
               <h3 md-line> <b>Min bid : </b>{{auctionObj.minBid}} </h3>
               <h3 md-line *ngIf="auctionObj.lastMaxBid!=''"> <b>Last bid : </b>{{auctionObj.lastMaxBid}} </h3>
               <h3 md-line *ngIf="auctionObj.lastMaxBid==''"> <b>Last bid : </b> Not bidded at this moment </h3>
-              <button md-button md-raised-button color="warn" (click)="awardBid(auctionObj)" *ngIf="auctionObj.lastMaxBid!='' && auctionObj.bidAwardedTo==''" style="position: absolute; right: 23px;"> Award Bid</button>
-              <h2 *ngIf="auctionObj.bidAwardedTo!=''" style="position: absolute; right: 45px;margin-top: 0;"> Sold</h2>
+              <button md-button md-raised-button color="warn" (click)="awardBid(auctionObj)" *ngIf="auctionObj.lastMaxBid!=''" style="position: absolute; right: 23px;"> Award Bid</button>
+              <!--<h2 *ngIf="auctionObj.bidAwardedTo!=''" style="position: absolute; right: 45px;margin-top: 0;"> Sold</h2>-->
             </md-list-item>
             <md-divider></md-divider>
           </div>
