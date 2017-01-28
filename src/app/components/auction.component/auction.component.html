@@ -8,98 +8,51 @@
 <md-tab-group class="signup-tab-container">
   <md-tab>
     <template md-tab-label>
-      Reserve Parking
+      New Auction
     </template>
 
     <md-card class="book-parking-container">
-      <md-card-title> Book Parking Slot For Administrators</md-card-title>
+      <md-card-title> Start New Auction </md-card-title>
       <md-card-content>
 
         <md-input-container>
-          <h5> Select Date: </h5>
-          <input type="date" md-input #myDate [value]="parkingObj.parkingDate | date:'yyyy-MM-dd'"
-                 (input)="parkingObj.userdate=parseDate($event.target.value)"/>
+          <input md-input [(ngModel)]="newAuctionObj.title" type="text" placeholder="Enter Title">
         </md-input-container>
 
         <br/>
         <br/>
-        <br/>
 
-        <md-select placeholder="Select Start Time" [(ngModel)]="parkingObj.startTime">
-          <md-option value="8AM">8AM</md-option>
-          <md-option value="9AM">9AM</md-option>
-          <md-option value="10AM">10AM</md-option>
-          <md-option value="11AM">11AM</md-option>
-          <md-option value="12PM">12PM</md-option>
-          <md-option value="1PM">1PM</md-option>
-          <md-option value="2PM">2PM</md-option>
-          <md-option value="3PM">3PM</md-option>
-          <md-option value="4PM">4PM</md-option>
-          <md-option value="5PM">5PM</md-option>
-          <md-option value="6PM">6PM</md-option>
-          <md-option value="7PM">7PM</md-option>
-          <md-option value="8PM">8PM</md-option>
-          <md-option value="9PM">9PM</md-option>
-          <md-option value="10PM">10PM</md-option>
-          <md-option value="11PM">11PM</md-option>
-          <md-option value="12PM">12AM</md-option>
-        </md-select>
+        <md-input-container>
+          <input md-input [(ngModel)]="newAuctionObj.minBid" type="text" placeholder="Enter Min Bid Price">
+        </md-input-container>
 
         <br/>
         <br/>
-        <br/>
-        <br/>
 
-        <md-select placeholder="Select Hours" [(ngModel)]="parkingObj.parkingHrs">
-          <md-option value="1">1</md-option>
-          <md-option value="2">2</md-option>
-          <md-option value="3">3</md-option>
-          <md-option value="4">4</md-option>
-          <md-option value="5">5</md-option>
-          <md-option value="6">6</md-option>
-          <md-option value="7">7</md-option>
-          <md-option value="8">8</md-option>
-          <md-option value="9">9</md-option>
-          <md-option value="10">10</md-option>
-          <md-option value="11">11</md-option>
-          <md-option value="12">12</md-option>
-        </md-select>
+        <md-input-container>
+          <input md-input [(ngModel)]="newAuctionObj.url" type="text" placeholder="Enter Image Url">
+        </md-input-container>
 
         <br/>
         <br/>
-        <br/>
-        <br/>
 
-        <md-select placeholder="Select Location" [(ngModel)]="parkingObj.location">
-          <md-option value="location1">location1</md-option>
-          <md-option value="location2">location2</md-option>
-          <md-option value="location3">location3</md-option>
-
-        </md-select>
+        <md-input-container>
+          <input md-input [(ngModel)]="newAuctionObj.qty" type="text" placeholder="Enter Item Quantity">
+        </md-input-container>
 
         <br/>
         <br/>
+
+        <md-input-container>
+          <input md-input [(ngModel)]="newAuctionObj.desc" type="text" placeholder="Enter Item Description">
+        </md-input-container>
+
         <br/>
-        <br/>
 
-        <div *ngIf="loadMaps">
-          <div class="location1" *ngIf="parkingObj.location == 'location1'">
-            <div *ngFor="let slot of locationList1.slots; let ind = index" [ngClass]="{changeBg: slot.selectable, alreadyReserved: (slot.bookedBy != '')}" (click)="selectSlot(1, slot, ind)">{{slot.name}}</div>
-          </div>
-
-          <div class="location2" *ngIf="parkingObj.location == 'location2'">
-            <div *ngFor="let slot of locationList2.slots; let ind = index" [ngClass]="{changeBg: slot.selectable, alreadyReserved: (slot.bookedBy != '')}" (click)="selectSlot(2, slot, ind)">{{slot.name}}</div>
-          </div>
-
-          <div class="location3" *ngIf="parkingObj.location == 'location3'">
-            <div *ngFor="let slot of locationList3.slots; let ind = index" [ngClass]="{changeBg: slot.selectable, alreadyReserved: (slot.bookedBy != '')}" (click)="selectSlot(3, slot, ind)">{{slot.name}}</div>
-          </div>
-        </div>
       </md-card-content>
 
-      <md-card-actions class="text-right padding-right-20 padding-bottom-10">
-        <span class="example-spacer"></span>
-        <button md-button md-raised-button color="primary" (click)="saveReservation()">Select Slot</button>
+      <md-card-actions>
+        <button md-button md-raised-button color="primary" (click)="postNewAuction()">Post</button>
       </md-card-actions>
 
     </md-card>
@@ -107,13 +60,13 @@
 
   <md-tab>
     <template md-tab-label>
-      App Users
+      My Auctions
     </template>
 
     <md-card class="view-reservations-container">
-      <md-card-title> View Your App Users </md-card-title>
+      <md-card-title> My Posted Auctions </md-card-title>
       <md-card-content>
-        <md-list>
+       <!-- <md-list>
           <div *ngFor="let userInfo of allUsersList">
             <md-list-item>
               <img md-list-avatar src="/assets/profile.png" alt="profile picture" height="60">
@@ -124,20 +77,20 @@
             </md-list-item>
             <md-divider></md-divider>
           </div>
-        </md-list>
+        </md-list>-->
       </md-card-content>
     </md-card>
   </md-tab>
 
   <md-tab>
     <template md-tab-label>
-      Cancel Reservation
+      Awarded Auctions
     </template>
 
     <md-card class="signup-container">
-      <md-card-title> Cancel Reservation</md-card-title>
+      <md-card-title> My Awarded Auctions </md-card-title>
       <md-card-content>
-        <md-list>
+        <!--<md-list>
           <div *ngFor="let slotInfo of myReservedParkingList">
             <md-list-item>
               <img md-list-avatar src="/assets/car.png_256" alt="profile picture" class="car-logo">
@@ -151,20 +104,20 @@
             </md-list-item>
             <md-divider></md-divider>
           </div>
-        </md-list>
+        </md-list>-->
       </md-card-content>
     </md-card>
   </md-tab>
 
   <md-tab>
     <template md-tab-label>
-      Feedbacks
+      Bid Auction
     </template>
 
     <md-card>
-      <md-card-title> View Feedback</md-card-title>
+      <md-card-title> Bid On Other Auctions </md-card-title>
       <md-card-content>
-        <md-list>
+        <!--<md-list>
           <div *ngFor="let feedObj of feedbackMsgList">
             <md-list-item>
               <img md-list-avatar src="/assets/profile.png" alt="profile picture" height="60">
@@ -172,7 +125,7 @@
             </md-list-item>
             <md-divider></md-divider>
           </div>
-        </md-list>
+        </md-list>-->
       </md-card-content>
     </md-card>
   </md-tab>
