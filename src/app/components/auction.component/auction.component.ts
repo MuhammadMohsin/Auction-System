@@ -25,6 +25,7 @@ export class AuctionComponent {
     qty: "",
     desc: "",
     lastMaxBid : "",
+    lastBidBy : "",
     postedBy: "",
     bidAwardedTo: ""
   };
@@ -69,6 +70,7 @@ export class AuctionComponent {
             qty: "",
             desc: "",
             lastMaxBid : "",
+            lastBidBy : "",
             postedBy: "",
             bidAwardedTo: ""
           };
@@ -84,6 +86,19 @@ export class AuctionComponent {
 
   applyBid(auctionObj){
     console.log(auctionObj);
+  }
+
+  awardBid(auctionObj){
+    console.log(auctionObj);
+    auctionObj.bidAwardedTo = auctionObj.lastBidBy;
+
+    let awardedTo: String= auctionObj.lastBidBy;
+    this.AuctionRef.update("-Kb_YFh1qKKakfvnZDNZ",{ bidAwardedTo: awardedTo })
+      .then(data=>{
+        alert("Auction awarded successfully");
+      }, err=>{
+        alert(err.message);
+      })
   }
 
   logout() {
