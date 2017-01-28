@@ -1,5 +1,5 @@
 <md-toolbar color="primary">
-  Real-time Parking Booking System (Admin Panel)
+  REALTIME AUCTION
   <a (click)="logout()" style="position: absolute; right: 23px; top: 18px;cursor:pointer;">
     <img md-list-avatar src="/assets/logout.png" alt="logout" height="30px">
   </a>
@@ -69,7 +69,7 @@
         <md-list>
           <div *ngFor="let auctionObj of myPostedAuctionsList">
             <md-list-item>
-              <img md-list-avatar src="/assets/profile.png" alt="profile picture" height="100" *ngIf="auctionObj.url==''">
+              <img md-list-avatar src="/assets/NoImageAvailable.jpg" height="130" *ngIf="auctionObj.url==''">
               <img md-list-avatar src="{{auctionObj.url}}" alt="profile picture" height="100" *ngIf="auctionObj.url!=''">
               <h1 md-line> <b>Title :  {{auctionObj.title}} </b> </h1>
               <h1 md-line> <b>Description :  {{auctionObj.desc}} </b> </h1>
@@ -118,15 +118,20 @@
     <md-card>
       <md-card-title> Bid On Other Auctions </md-card-title>
       <md-card-content>
-        <!--<md-list>
-          <div *ngFor="let feedObj of feedbackMsgList">
+        <md-list>
+          <div *ngFor="let auctionObj of auctionsList">
             <md-list-item>
-              <img md-list-avatar src="/assets/profile.png" alt="profile picture" height="60">
-              <h1 md-line> <b>Message : </b> {{feedObj.message}} </h1>
+              <img md-list-avatar src="/assets/NoImageAvailable.jpg" height="130" *ngIf="auctionObj.url==''">
+              <img md-list-avatar src="{{auctionObj.url}}" alt="profile picture" height="100" *ngIf="auctionObj.url!=''">
+              <h1 md-line> <b>Title :  {{auctionObj.title}} </b> </h1>
+              <h1 md-line> <b>Description :  {{auctionObj.desc}} </b> </h1>
+              <h3 md-line> <b>Quantity : </b>{{auctionObj.qty}} </h3>
+              <h3 md-line> <b>Min bid : </b>{{auctionObj.minBid}} </h3>
+              <button md-button md-raised-button color="primary" (click)="applyBid(auctionObj)" style="position: absolute; right: 23px;"> Bid</button>
             </md-list-item>
             <md-divider></md-divider>
           </div>
-        </md-list>-->
+        </md-list>
       </md-card-content>
     </md-card>
   </md-tab>

@@ -70,7 +70,10 @@ export class AuctionComponent {
     else{
       alert("Please alert all required fields");
     }
+  }
 
+  applyBid(auctionObj){
+    console.log(auctionObj);
   }
 
   logout() {
