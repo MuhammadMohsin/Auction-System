@@ -33,8 +33,11 @@ export class AuctionComponent {
     this.userService = _userService;
     this.userAuth = this.userService.getUserData();
     let authUserKey: String = this.userAuth.$key;
+
     this.AuctionRef = this.afRef.database.list("/auctions");
     this.AuctionRef.subscribe(auctions=>{
+      this.auctionsList = [];
+      this.myPostedAuctionsList = [];
       this.auctionsList = auctions;
       this.auctionsList.forEach(auctionObj=>{
         if(auctionObj.postedBy == authUserKey){
