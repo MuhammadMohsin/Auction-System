@@ -14,7 +14,8 @@ export class AuctionComponent {
   userAuth;
   router;
   userService;
-  AuctionsList;
+  auctionsList = [];
+  myPostedAuctionsList = [];
 
   newAuctionObj = {
     title: "",
@@ -22,7 +23,8 @@ export class AuctionComponent {
     url: "",
     qty: "",
     desc: "",
-    lastMaxBid : ""
+    lastMaxBid : "",
+    postedBy: ""
   };
 
   constructor(private af: AngularFire, private _router: Router, private _userService: UserService) {
@@ -30,9 +32,16 @@ export class AuctionComponent {
     this.router = _router;
     this.userService = _userService;
     this.userAuth = this.userService.getUserData();
+    let authUserKey: String = this.userAuth.$key;
     this.AuctionRef = this.afRef.database.list("/auctions");
-    this.AuctionRef.subscribe(feeds=>{
-      this.AuctionsList = feeds;
+    this.AuctionRef.subscribe(auctions=>{
+      this.auctionsList = auctions;
+      this.auctionsList.forEach(auctionObj=>{
+        if(auctionObj.postedBy == authUserKey){
+          this.myPostedAuctionsList.push(auctionObj);
+        }
+      })
+
     });
 
   }
@@ -41,6 +50,7 @@ export class AuctionComponent {
     if(this.newAuctionObj.title.trim()!="" && this.newAuctionObj.minBid.trim()!="" && this.newAuctionObj.qty.trim()!="" && this.newAuctionObj.desc.trim()!=""){
       console.log(this.newAuctionObj);
       this.newAuctionObj.lastMaxBid = "";
+      this.newAuctionObj.postedBy =  this.userAuth.$key;
       this.AuctionRef.push(this.newAuctionObj)
         .then(data=>{
           this.newAuctionObj = {
@@ -49,7 +59,8 @@ export class AuctionComponent {
             url: "",
             qty: "",
             desc: "",
-            lastMaxBid : ""
+            lastMaxBid : "",
+            postedBy: "",
           };
           alert("Auction posted successfully");
         }, err=>{
